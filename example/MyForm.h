@@ -1,4 +1,5 @@
 #pragma once
+#include "MyForm1.h"
 
 namespace example {
 
@@ -36,6 +37,8 @@ namespace example {
 		}
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::TextBox^  textBox2;
+	private: System::Windows::Forms::RadioButton^  radioButton1;
+	private: System::Windows::Forms::RadioButton^  radioButton2;
 	protected:
 
 	private:
@@ -53,6 +56,8 @@ namespace example {
 		{
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
+			this->radioButton2 = (gcnew System::Windows::Forms::RadioButton());
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -70,11 +75,36 @@ namespace example {
 			this->textBox2->Size = System::Drawing::Size(260, 20);
 			this->textBox2->TabIndex = 1;
 			// 
+			// radioButton1
+			// 
+			this->radioButton1->AutoSize = true;
+			this->radioButton1->Location = System::Drawing::Point(12, 109);
+			this->radioButton1->Name = L"radioButton1";
+			this->radioButton1->Size = System::Drawing::Size(85, 17);
+			this->radioButton1->TabIndex = 2;
+			this->radioButton1->TabStop = true;
+			this->radioButton1->Text = L"radioButton1";
+			this->radioButton1->UseVisualStyleBackColor = true;
+			this->radioButton1->CheckedChanged += gcnew System::EventHandler(this, &MyForm::radioButton1_CheckedChanged);
+			// 
+			// radioButton2
+			// 
+			this->radioButton2->AutoSize = true;
+			this->radioButton2->Location = System::Drawing::Point(12, 132);
+			this->radioButton2->Name = L"radioButton2";
+			this->radioButton2->Size = System::Drawing::Size(85, 17);
+			this->radioButton2->TabIndex = 3;
+			this->radioButton2->TabStop = true;
+			this->radioButton2->Text = L"radioButton2";
+			this->radioButton2->UseVisualStyleBackColor = true;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(284, 262);
+			this->Controls->Add(this->radioButton2);
+			this->Controls->Add(this->radioButton1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
 			this->Name = L"MyForm";
@@ -89,5 +119,11 @@ namespace example {
 		{
 			textBox2->Text = textBox1->Text;
 		}
-	};
+	private: 
+		System::Void radioButton1_CheckedChanged(System::Object^  sender, System::EventArgs^  e) 
+		{
+			MyForm1 ^ mf1 = gcnew MyForm1;
+			mf1->Show();
+		}
+};
 }
