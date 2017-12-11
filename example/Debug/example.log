@@ -1,2 +1,3 @@
 ﻿  MyForm.cpp
+c:\users\сергей\desktop\lab3_tp\example\example\MyForm.h(171): warning C4101: str: неиспользованная локальная переменная
   example.vcxproj -> C:\Users\Сергей\Desktop\LAB3_TP\example\Debug\example.exe

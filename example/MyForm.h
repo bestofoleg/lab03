@@ -1,5 +1,7 @@
 #pragma once
 #include "MyForm1.h"
+#include <fstream>
+#include <string>
 
 namespace example {
 
@@ -39,6 +41,9 @@ namespace example {
 	private: System::Windows::Forms::TextBox^  textBox2;
 	private: System::Windows::Forms::RadioButton^  radioButton1;
 	private: System::Windows::Forms::RadioButton^  radioButton2;
+	private: System::Windows::Forms::TextBox^  textBox3;
+	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
 	protected:
 
 	private:
@@ -58,6 +63,9 @@ namespace example {
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
 			this->radioButton2 = (gcnew System::Windows::Forms::RadioButton());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -98,11 +106,34 @@ namespace example {
 			this->radioButton2->Text = L"radioButton2";
 			this->radioButton2->UseVisualStyleBackColor = true;
 			// 
+			// textBox3
+			// 
+			this->textBox3->Location = System::Drawing::Point(11, 170);
+			this->textBox3->Name = L"textBox3";
+			this->textBox3->Size = System::Drawing::Size(259, 20);
+			this->textBox3->TabIndex = 4;
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(12, 196);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 5;
+			this->button1->Text = L"Save";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			// 
+			// openFileDialog1
+			// 
+			this->openFileDialog1->FileName = L"openFileDialog1";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(284, 262);
+			this->ClientSize = System::Drawing::Size(284, 321);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->textBox3);
 			this->Controls->Add(this->radioButton2);
 			this->Controls->Add(this->radioButton1);
 			this->Controls->Add(this->textBox2);
@@ -124,6 +155,26 @@ namespace example {
 		{
 			MyForm1 ^ mf1 = gcnew MyForm1;
 			mf1->Show();
+		}
+	private: 
+		System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) 
+		{
+			if(this->openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			{
+				wchar_t fileName[1024];
+				for (int i = 0; i < openFileDialog1->FileName->Length; i++)
+					fileName[i] = openFileDialog1->FileName[i];
+				fileName[openFileDialog1->FileName->Length] = '\0';
+				std::ofstream out;
+				out.open(fileName);
+
+				wchar_t str[1024];
+
+				for (int i = 0; i < textBox3->Text->Length; i++)
+					out<<(char)textBox3->Text[i];
+
+				
+			}
 		}
 };
 }
